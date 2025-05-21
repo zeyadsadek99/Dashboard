@@ -1,5 +1,5 @@
 <template>
-  <div class="card flex flex-col max-h-screen h-screen overflow-auto gap-6">
+  <div class="card flex flex-col max-h-screen h-screen scroll-auto py-7 overflow-auto gap-6">
     <div>
       <img src="../assets/images/logo/logo.svg" alt="" class="w-20 mx-auto" />
     </div>
@@ -8,7 +8,7 @@
         <router-link :to="item.to">
           <a class="flex items-center px-4 py-2 cursor-pointer group">
             <GlobalIcons :name="item?.icon" classes="w-5 h-5 !text-white" />
-            <span :class="['ml-2', { 'font-semibold': item.items }]">{{
+            <span :class="['ms-4 ', { 'font-semibold': item.items }]">{{
               item.label
             }}</span>
             <Badge v-if="item.badge" class="ml-auto" :value="item.badge" />
