@@ -2,16 +2,16 @@
   <div class="flex flex-col app !bg-white">
     <div class="flex">
       <sideBar />
-      
-      <div class="app_wrapper flex-1 p-4">
-    <navbar />
 
-        <router-link to="/">Home</router-link>
-        <router-link to="/slider">Slider</router-link>
+      <div class="app_wrapper flex-1 space-y-4  p-4">
+        <navbar />
+
+        <!-- <router-link to="/">Home</router-link>
+        <router-link to="/slider">Slider</router-link> -->
         <router-view></router-view>
       </div>
     </div>
-    <footer class="mt-auto">
+    <!-- <footer class="mt-auto">
       <p class="text-sub py-3 text-center text-sm">
         "All Copyrights are reserved by"
 
@@ -21,7 +21,7 @@
           }}
         </bdi>
       </p>
-    </footer>
+    </footer> -->
   </div>
 </template>
 

@@ -1,33 +1,57 @@
-
 <template>
-    <div class="card flex gap-10 justify-between items-center ">
-        <div class="flex">
-            <Breadcrumb :home="home" :model="items" class="!bg-white" />
-        </div>
-        <div class="flex gap-6 items-center justify-center px-4">
-            <Button label="New" icon="pi pi-plus"  />
-            <button @click=""  class="bg-transparent border-none !text-black cursor-pointer">
-                <GlobalIcons name="envelope" classes="w-5 h-5 !text-black" />
-            </button>
-            <button @click="" class="bg-transparent border-none !text-black cursor-pointer">
-            <GlobalIcons name="notification2" classes="w-5 h-5 !text-black" />
-        </button>
-        <img src="../assets/images/logo/logo.svg" alt="" class="w-10 rounded-full mx-auto" />
-        </div>
+  <div class="card flex gap-10 justify-between items-center">
+    <div>
+      <p class="text-2xl font-semibold text-black">Welcome, Zeyad</p>
     </div>
+    <!-- <div class="flex">
+            <Breadcrumb :home="home" :model="items" class="!bg-white" />
+        </div> -->
+    <div class="flex gap-4 items-center justify-center px-4">
+      <!-- <Button label="New" icon="pi pi-plus" /> -->
+      <button
+        @click=""
+        class="bg-(--primary-color) hover:!bg-(--primary-color)/60 rounded-full border-none text-white hover:!text-black/60 transition-all duration-300 ease-in-out p-2 cursor-pointer"
+      >
+        <GlobalIcons name="sign-out" classes="size-6" />
+      </button>
+      <button
+        @click=""
+        class="bg-(--primary-color) hover:!bg-(--primary-color)/60 rounded-full border-none     text-white hover:!text-black/60 transition-all duration-300 ease-in-out p-2 cursor-pointer"
+      >
+        <GlobalIcons name="lang" classes="size-6 " />
+      </button>
+      <button
+        @click=""
+        class="bg-(--primary-color) hover:!bg-(--primary-color)/60 rounded-full border-none text-white hover:!text-black/60 transition-all duration-300 ease-in-out p-2 cursor-pointer"
+      >
+        <GlobalIcons name="messages" classes="size-6 " />
+      </button>
+      <button
+        @click=""
+        class="bg-(--primary-color) hover:!bg-(--primary-color)/60 rounded-full border-none text-white hover:!text-black/60 transition-all duration-300 ease-in-out p-2 cursor-pointer"
+      >
+        <GlobalIcons name="bell" classes="size-6 " />
+      </button>
+      <img
+        src="../assets/images/static/food.png"
+        alt=""
+        class="size-10 rounded-full mx-auto"
+      />
+    </div>
+  </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
 
 const home = ref({
-    icon: 'pi pi-home'
+  icon: "pi pi-home",
 });
 const items = ref([
-    { label: 'Electronics' },
-    { label: 'Computer' },
-    { label: 'Accessories' },
-    { label: 'Keyboard' },
-    { label: 'Wireless' }
+  { label: "Electronics" },
+  { label: "Computer" },
+  { label: "Accessories" },
+  { label: "Keyboard" },
+  { label: "Wireless" },
 ]);
 </script>

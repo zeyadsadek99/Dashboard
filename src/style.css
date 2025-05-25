@@ -1,4 +1,8 @@
 @import "tailwindcss";
 
-@layer utilities {
+@theme {
+  --breakpoint-3xl: 120rem;
+  --primary-color: #60898c;
+  --p-datatable-header-background: #f0f0f0;
+  --secondary-color: #bcc2c4;
 }

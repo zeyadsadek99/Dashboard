@@ -1,52 +1,106 @@
 <template>
-  <div class="card">
-    <Carousel
+  <div class="card !bg-(--primary-color) rounded-2xl">
+    <DataTable
+      unstyled
       :value="products"
-      :numVisible="3"
-      :numScroll="3"
-      :responsiveOptions="responsiveOptions"
+      class="p-4 flex flex-col gap-4"
+      tableStyle="width: 100%"
     >
-      <template #item="slotProps">
-        <div
-          class="border border-surface-200 dark:border-surface-700 rounded m-2 p-4"
-        >
-          <div class="mb-4">
-            <div class="relative mx-auto">
-              <img
-                :src="
-                  'https://primefaces.org/cdn/primevue/images/product/' +
-                  slotProps.data.image
-                "
-                :alt="slotProps.data.name"
-                class="w-full rounded"
-              />
-              <Tag
-                :value="slotProps.data.inventoryStatus"
-                :severity="getSeverity(slotProps.data.inventoryStatus)"
-                class="absolute"
-                style="left: 5px; top: 5px"
-              />
-            </div>
-          </div>
-          <div class="mb-4 font-medium">{{ slotProps.data.name }}</div>
-          <div class="flex justify-between items-center">
-            <div class="mt-0 font-semibold text-xl">
-              ${{ slotProps.data.price }}
-            </div>
-            <span>
-              <Button icon="pi pi-heart" severity="secondary" outlined />
-              <Button icon="pi pi-shopping-cart" class="ml-2" />
-            </span>
-          </div>
+      <template #header>
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <span class="text-xl font-bold">Products</span>
         </div>
       </template>
-    </Carousel>
+      <Column field="name" header="Name" class="text-center mx-10"></Column>
+      <Column header="Image" class="text-center">
+        <template #body="slotProps">
+          <img
+            :src="`https://primefaces.org/cdn/primevue/images/product/${slotProps.data.image}`"
+            :alt="slotProps.data.image"
+            class="w-24 rounded mx-auto my-3"
+          />
+        </template>
+      </Column>
+      <Column field="price" header="Price " class="text-center">
+        <template #body="slotProps">
+          {{ formatCurrency(slotProps.data.price) }}
+        </template>
+      </Column>
+      <Column field="category" header="Category" class="text-center"></Column>
+      <Column field="rating" header="Reviews" class="text-center">
+        <template #body="slotProps">
+          <Rating
+            :modelValue="slotProps.data.rating"
+            readonly
+            class="mx-auto flex justify-center"
+          />
+        </template>
+      </Column>
+      <Column header="Status" class="text-center">
+        <template #body="slotProps">
+          <Tag
+            :value="slotProps.data.inventoryStatus"
+            :severity="getSeverity(slotProps.data)"
+          />
+        </template>
+      </Column>
+      <Column header="Actions" class="text-center">
+        <template #body="slotProps">
+          <div class="flex gap-2 items-center justify-center">
+            <button
+              type="button"
+              class="cursor-pointer"
+              @click="openEditProductDialog(slotProps.data)"
+            >
+              <GlobalIcons name="edit" />
+            </button>
+            <Dialog
+              v-model:visible="editProductDialog"
+              :style="{ width: '450px' }"
+              header="Edit Product"
+              :modal="true"
+            >
+            </Dialog>
+            <ConfirmPopup></ConfirmPopup>
+
+            <button
+              class="cursor-pointer"
+              @click="deleteProduct(slotProps.data)"
+            >
+              <GlobalIcons name="trash" classes="mb-1" />
+            </button>
+          </div>
+        </template>
+      </Column>
+
+      <template #footer>
+        In total there are {{ products ? products.length : 0 }} products.
+      </template>
+    </DataTable>
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from "vue";
-// import { ProductService } from "@/service/ProductService";
+  
+const editProductDialog = ref(false);
+const editingProduct = ref(null);
+
+const openEditProductDialog = (product) => {
+  editingProduct.value = { ...product };
+  editProductDialog.value = true;
+};
+
+const saveProduct = (product) => {
+  // Update the product in the products array
+  const index = products.value.findIndex((p) => p.id === product.id);
+  if (index !== -1) {
+    products.value[index] = product;
+  }
+
+  // Close the dialog
+  editProductDialog.value = false;
+};
 
 const products = ref([
   {
@@ -62,7 +116,7 @@ const products = ref([
     rating: 5,
   },
   {
-    id: "1002",
+    id: "1001",
     code: "f230fh0g3",
     name: "Bamboo Watch",
     description: "Product Description",
@@ -74,7 +128,7 @@ const products = ref([
     rating: 5,
   },
   {
-    id: "1003",
+    id: "1002",
     code: "f230fh0g3",
     name: "Bamboo Watch",
     description: "Product Description",
@@ -86,48 +140,33 @@ const products = ref([
     rating: 5,
   },
 ]);
-onMounted(() => {
-  // ProductService.getProductsSmall().then(
-  //   (data) => (products.value = data.slice(0, 9))
-  // );
-});
-
-const responsiveOptions = ref([
-  {
-    breakpoint: "1400px",
-    numVisible: 2,
-    numScroll: 1,
-  },
-  {
-    breakpoint: "1199px",
-    numVisible: 3,
-    numScroll: 1,
-  },
-  {
-    breakpoint: "767px",
-    numVisible: 2,
-    numScroll: 1,
-  },
-  {
-    breakpoint: "575px",
-    numVisible: 1,
-    numScroll: 1,
-  },
-]);
-
-const getSeverity = (status) => {
-  switch (status) {
+const formatCurrency = (value) => {
+  return value.toLocaleString("en-US", { style: "currency", currency: "USD" });
+};
+const getSeverity = (product) => {
+  switch (product.inventoryStatus) {
     case "INSTOCK":
-      return "Success";
+      return "success";
 
     case "LOWSTOCK":
       return "warn";
 
     case "OUTOFSTOCK":
-      return "Danger";
+      return "danger";
 
     default:
       return null;
   }
 };
+
+const editProduct = (product) => {
+  console.log(product);
+};
+
+const deleteProduct = (product) => {
+  console.log(product);
+};
 </script>
+<style>
+@reference "../style.css";
+</style>
