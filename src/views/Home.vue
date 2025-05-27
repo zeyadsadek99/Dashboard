@@ -1,5 +1,5 @@
 <template>
-  <div class="card !bg-(--primary-color) rounded-2xl">
+  <div class="card !bg-primary rounded-2xl">
     <DataTable
       unstyled
       :value="products"
@@ -74,6 +74,7 @@
       </Column>
 
       <template #footer>
+        {{ t("hello") }}
         In total there are {{ products ? products.length : 0 }} products.
       </template>
     </DataTable>
@@ -82,6 +83,11 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
+import { useI18n } from "vue-i18n";
+import axios from "axios";
+
+
+const { t } = useI18n();
   
 const editProductDialog = ref(false);
 const editingProduct = ref(null);
@@ -158,6 +164,18 @@ const getSeverity = (product) => {
       return null;
   }
 };
+
+const fetchProducts = async () => {
+  try {
+    const response = await axios.get("brands");
+    products.value = response.data;
+  } catch (error) {
+    console.error("Error fetching products:", error);
+  }
+};
+onMounted(() => {
+  fetchProducts();
+});
 
 const editProduct = (product) => {
   console.log(product);

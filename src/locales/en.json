@@ -1,0 +1,27 @@
+{
+    "hello": "hello",
+    "TITLES": {
+        "welcomeTo": "Welcome to Filter",
+        "Login": "Login"
+    },
+    "LABELS": {
+        "email": "Email",
+        "password": "Password",
+        "phone": "Phone",
+        "phoneCode": "Phone Code",
+        "Enter": "Enter your {name}"
+    },
+    "ERRORS": {
+        "isRequired": "This field is required",
+        "validEmailAddress": "Please enter a valid email address",
+        "emailAddress": "Email Address is required",
+        "password": "Password is required"
+    },
+    "BUTTONS": {
+        "login": "Login"
+    },
+    "locale": {
+        "ar": "Ar",
+        "en": "En"
+    }
+}

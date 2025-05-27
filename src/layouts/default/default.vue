@@ -3,8 +3,8 @@
     <div class="flex">
       <sideBar />
 
-      <div class="app_wrapper flex-1 space-y-4  p-4">
-        <navbar />
+      <div class="app_wrapper flex-1 space-y-4 p-4">
+        <authNavbar />
 
         <!-- <router-link to="/">Home</router-link>
         <router-link to="/slider">Slider</router-link> -->

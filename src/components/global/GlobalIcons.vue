@@ -6,6 +6,11 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  path: {
+    type: String,
+    required: false,
+    default: "icons",
+  },
 
   classes: {
     type: String,
@@ -14,7 +19,7 @@ const props = defineProps({
 });
 
 const icon = defineAsyncComponent(() =>
-  import(`@/assets/images/icons/${props.name}.svg`)
+  import(`@/assets/images/${props.path}/${props.name}.svg`)
 );
 </script>
 

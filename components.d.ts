@@ -10,13 +10,13 @@ declare module 'vue' {
   export interface GlobalComponents {
     Badge: typeof import('primevue/badge')['default']
     Button: typeof import('primevue/button')['default']
-    Default: typeof import('./src/layouts/default.vue')['default']
+    Default: typeof import('./src/layouts/default/default.vue')['default']
     Footer: typeof import('./src/components/footer.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     InputText: typeof import('primevue/inputtext')['default']
     PanelMenu: typeof import('primevue/panelmenu')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    SideBar: typeof import('./src/layouts/sideBar.vue')['default']
+    SideBar: typeof import('./src/layouts/default/sideBar.vue')['default']
   }
 }

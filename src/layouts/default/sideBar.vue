@@ -1,6 +1,6 @@
 <template>
   <div
-    class="card flex flex-col max-h-screen h-screen scroll-auto py-7 px-3 !bg-(--primary-color) overflow-auto gap-6"
+    class="card flex flex-col max-h-screen h-screen scroll-auto py-7 px-3 !bg-primary overflow-auto gap-6"
   >
     <div class="flex items-center justify-center px-4">
       <!-- <p class="text-white text-lg font-semibold mb-1">Hello, Zeyad</p> -->
@@ -110,7 +110,7 @@ const items = ref([
 ]);
 </script>
 <style>
-@reference "../style.css";
+@reference "@/style.css";
 .p-panelmenu-header-content {
   @apply bg-transparent hover:!bg-transparent;
 }

@@ -8,32 +8,32 @@
         </div> -->
     <div class="flex gap-4 items-center justify-center px-4">
       <!-- <Button label="New" icon="pi pi-plus" /> -->
-      <button
-        @click=""
-        class="bg-(--primary-color) hover:!bg-(--primary-color)/60 rounded-full border-none text-white hover:!text-black/60 transition-all duration-300 ease-in-out p-2 cursor-pointer"
+      <router-link
+        to="auth/login"
+        class="bg-primary hover:!bg-primary/60 rounded-full border-none text-white hover:!text-black/60 transition-all duration-300 ease-in-out p-2 cursor-pointer"
       >
         <GlobalIcons name="sign-out" classes="size-6" />
-      </button>
+      </router-link>
       <button
         @click=""
-        class="bg-(--primary-color) hover:!bg-(--primary-color)/60 rounded-full border-none     text-white hover:!text-black/60 transition-all duration-300 ease-in-out p-2 cursor-pointer"
+        class="bg-primary hover:!bg-primary/60 rounded-full border-none text-white hover:!text-black/60 transition-all duration-300 ease-in-out p-2 cursor-pointer"
       >
         <GlobalIcons name="lang" classes="size-6 " />
       </button>
       <button
         @click=""
-        class="bg-(--primary-color) hover:!bg-(--primary-color)/60 rounded-full border-none text-white hover:!text-black/60 transition-all duration-300 ease-in-out p-2 cursor-pointer"
+        class="bg-primary hover:!bg-primary/60 rounded-full border-none text-white hover:!text-black/60 transition-all duration-300 ease-in-out p-2 cursor-pointer"
       >
         <GlobalIcons name="messages" classes="size-6 " />
       </button>
       <button
         @click=""
-        class="bg-(--primary-color) hover:!bg-(--primary-color)/60 rounded-full border-none text-white hover:!text-black/60 transition-all duration-300 ease-in-out p-2 cursor-pointer"
+        class="bg-primary hover:!bg-primary/60 rounded-full border-none text-white hover:!text-black/60 transition-all duration-300 ease-in-out p-2 cursor-pointer"
       >
         <GlobalIcons name="bell" classes="size-6 " />
       </button>
       <img
-        src="../assets/images/static/food.png"
+        src="@/assets/images/static/food.png"
         alt=""
         class="size-10 rounded-full mx-auto"
       />
@@ -43,6 +43,7 @@
 
 <script setup>
 import { ref } from "vue";
+
 
 const home = ref({
   icon: "pi pi-home",

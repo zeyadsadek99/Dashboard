@@ -2,7 +2,10 @@ import { createApp } from "vue";
 import "./style.css";
 import App from "./App.vue";
 import PrimeVue from "primevue/config";
-import Aura from "@primeuix/themes/aura";
+import Aura from "@primeuix/themes/aura"
+import { registerAxios } from "./plugins/axios";
+import { registerVeeValidate } from "./plugins/veeValidate";
+import i18n from "./plugins/i18n";
 
 import router from "./router";
 
@@ -15,7 +18,10 @@ app.use(PrimeVue, {
   theme: {
     preset: Aura,
   },
-});
+}); 
 globalComponents(app);
+registerAxios();
+registerVeeValidate(app);
 app.use(router);
+app.use(i18n);
 app.mount("#app");

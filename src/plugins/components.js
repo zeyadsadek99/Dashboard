@@ -1,13 +1,24 @@
 
 
-import sideBar from "../layouts/sideBar.vue";
-import navbar from "../layouts/navbar.vue";
+import sideBar from "../layouts/default/sideBar.vue";
+import authNavbar from "../layouts/default/navbar.vue";
+import Navbar from "../layouts/auth/Navbar.vue";
 
 
 import GlobalIcons from "../components/global/GlobalIcons.vue";
+import BaseInput from "../components/inputs/BaseInput.vue";
+import BaseSelect from "../components/inputs/BaseSelect.vue";
+import BasePassword from "../components/inputs/BasePassword.vue";
+import BasePhone from "../components/inputs/BasePhone.vue";
 
 export default function globalComponents(app) {
   app.component("sideBar", sideBar);
-  app.component("navbar", navbar);
+  app.component("authNavbar", authNavbar);
+  app.component("Navbar", Navbar);
+
   app.component("GlobalIcons", GlobalIcons);
+  app.component("BaseInput", BaseInput);
+  app.component("BaseSelect", BaseSelect);
+  app.component("BasePassword", BasePassword);
+  app.component("BasePhone", BasePhone);
 }
