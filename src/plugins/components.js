@@ -10,6 +10,7 @@ import BaseInput from "../components/inputs/BaseInput.vue";
 import BaseSelect from "../components/inputs/BaseSelect.vue";
 import BasePassword from "../components/inputs/BasePassword.vue";
 import BasePhone from "../components/inputs/BasePhone.vue";
+import GlobalButton from "../components/global/GlobalButton.vue";
 
 export default function globalComponents(app) {
   app.component("sideBar", sideBar);
@@ -21,4 +22,5 @@ export default function globalComponents(app) {
   app.component("BaseSelect", BaseSelect);
   app.component("BasePassword", BasePassword);
   app.component("BasePhone", BasePhone);
+  app.component("GlobalButton", GlobalButton);
 }

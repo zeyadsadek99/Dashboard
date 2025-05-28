@@ -18,7 +18,8 @@
         "password": "Password is required"
     },
     "BUTTONS": {
-        "login": "Login"
+        "login": "Login",
+        "Add Product": "Add Product"
     },
     "locale": {
         "ar": "Ar",

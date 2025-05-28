@@ -25,6 +25,65 @@ const router = createRouter({
           component: Slider,
         },
         {
+          path: "vendors",
+          meta: {
+            auth: true,
+          },
+          component: () => import("@/views/dashboard/vendors/Home.vue"),
+          children: [
+            {
+              path: "",
+              name: "vendors",
+              // meta: {
+              //   auth: true,
+              //   permission: ["facility-types", "index"],
+              // },
+              component: () => import("../views/dashboard/vendors/index.vue"),
+            },
+
+            {
+              path: "show/:id",
+              props: true,
+              name: "show-vendor",
+              // meta: {
+              //   auth: true,
+              //   permission: ["facility-types", "update"],
+              // },
+              component: () => import("../views/dashboard/vendors/show.vue"),
+            },
+            {
+              path: "add",
+              props: true,
+              name: "add-vendor",
+              // meta: {
+              //   auth: true,
+              //   permission: ["facility-types", "store"],
+              // },
+              component: () => import("../views/dashboard/vendors/show.vue"),
+            },
+            {
+              path: "edit/:id",
+              props: true,
+              name: "edit-vendor",
+              // meta: {
+              //   auth: true,
+              //   permission: ["facility-types", "store"],
+              // },
+              component: () => import("../views/dashboard/vendors/show.vue"),
+            },
+          ],
+        },
+        // {
+        //   path: "vendors",
+        //   name: "vendors",
+        //   component: () => import("../views/dashboard/vendors/index.vue"),
+        // },
+        // {
+        //   path: "vendors/:id",
+        //   name: "vendors-show",
+        //   component: () => import("../views/dashboard/vendors/show.vue"),
+        // },
+        {
           path: "/:pathMatch(.*)*",
           name: "not-found",
           component: () => import("@/views/NotFound.vue"),

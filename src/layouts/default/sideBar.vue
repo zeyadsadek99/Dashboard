@@ -75,6 +75,7 @@ const items = ref([
     label: "Mail2",
     icon: "envelope",
     badge: 5,
+    to: "/vendors",
   },
   {
     label: "Mail3",
