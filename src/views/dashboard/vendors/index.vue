@@ -1,8 +1,14 @@
 <template>
-    <div class="card !bg-primary rounded-2xl">
+  <template v-if="loading">
+    <GlobalLoader class="text-primary" />
+  </template>
+  <template v-else>
+    <div
+      class="card !bg-white !text-black rounded-2xl shadow-[0px_2px_10px_0px_var(--color-primary)]"
+    >
       <DataTable
         unstyled
-        :value="products.data"
+        :value="products"
         class="p-4 flex flex-col gap-4"
         tableStyle="width: 100%"
       >
@@ -89,16 +95,16 @@
               <router-link
                 :to="`/vendors/show/${slotProps.data.id}`"
                 type="button"
-                class="cursor-pointer mt-1"
+                class="cursor-pointer"
               >
-                <GlobalIcons name="eye2" />
+                <GlobalIcons name="eye2" classes="text-blue-500 mt-1" />
               </router-link>
               <button
                 type="button"
                 class="cursor-pointer"
                 @click="openEditProductDialog(slotProps.data)"
               >
-                <GlobalIcons name="edit" />
+                <GlobalIcons name="edit" classes="text-green-500" />
               </button>
               <Dialog
                 v-model:visible="editProductDialog"
@@ -108,17 +114,17 @@
               >
               </Dialog>
               <ConfirmPopup></ConfirmPopup>
-  
+
               <button
                 class="cursor-pointer"
                 @click="deleteProduct(slotProps.data)"
               >
-                <GlobalIcons name="trash" classes="mb-1" />
+                <GlobalIcons name="trash" classes="mb-1 text-red-500" />
               </button>
             </div>
           </template>
         </Column>
-  
+
         <template #footer>
           <GlobalButton
             name="Add Product"
@@ -132,109 +138,133 @@
       </DataTable>
     </div>
   </template>
-  
-  <script setup>
-  import { ref, onMounted } from "vue";
-  import { useI18n } from "vue-i18n";
-  import axios from "axios";
-  
-  const { t } = useI18n();
-  
-  const editProductDialog = ref(false);
-  const editingProduct = ref(null);
-  
-  const openEditProductDialog = () => {
-    editingProduct.value = null;
-    editProductDialog.value = true;
-  };
-  
-  const saveProduct = (product) => {
-    // Update the product in the products array
-    const index = products.value.findIndex((p) => p.id === product.id);
-    if (index !== -1) {
-      products.value[index] = product;
-    }
-  
-    // Close the dialog
-    editProductDialog.value = false;
-  };
-  
-  // const products = ref([
-  //   {
-  //     id: "1000",
-  //     code: "f230fh0g3",
-  //     name: "Bamboo Watch",
-  //     description: "Product Description",
-  //     image: "bamboo-watch.jpg",
-  //     price: 65,
-  //     category: "Accessories",
-  //     quantity: 24,
-  //     inventoryStatus: "INSTOCK",
-  //     rating: 5,
-  //   },
-  //   {
-  //     id: "1001",
-  //     code: "f230fh0g3",
-  //     name: "Bamboo Watch",
-  //     description: "Product Description",
-  //     image: "bamboo-watch.jpg",
-  //     price: 65,
-  //     category: "Accessories",
-  //     quantity: 24,
-  //     inventoryStatus: "LOWSTOCK",
-  //     rating: 5,
-  //   },
-  //   {
-  //     id: "1002",
-  //     code: "f230fh0g3",
-  //     name: "Bamboo Watch",
-  //     description: "Product Description",
-  //     image: "bamboo-watch.jpg",
-  //     price: 65,
-  //     category: "Accessories",
-  //     quantity: 24,
-  //     inventoryStatus: "INSTOCK",
-  //     rating: 5,
-  //   },
-  // ]);
-  const formatCurrency = (value) => {
-    if (value == null || isNaN(value)) {
-      // Handle invalid value (e.g., undefined, null, or NaN)
-      return "Invalid Value"; // Or return a fallback value like '$0.00'
-    }
-  
-    return value.toLocaleString("en-US", { style: "currency", currency: "USD" });
-  };
-  const getSeverity = (product) => {
-    switch (product.inventoryStatus) {
-      case "INSTOCK":
-        return "success";
-  
-      case "LOWSTOCK":
-        return "warn";
-  
-      case "OUTOFSTOCK":
-        return "danger";
-  
-      default:
-        return null;
-    }
-  };
-  
-  const { data: products } = await axios.get("vendors");
-  onMounted(() => {
-    // fetchProducts();
+</template>
+
+<script setup>
+import { ref, onMounted } from "vue";
+import { useI18n } from "vue-i18n";
+import axios from "axios";
+
+const { t } = useI18n();
+const loading = ref(false);
+
+const editProductDialog = ref(false);
+const editingProduct = ref(null);
+
+const openEditProductDialog = () => {
+  editingProduct.value = null;
+  editProductDialog.value = true;
+};
+
+const saveProduct = (product) => {
+  // Update the product in the products array
+  const index = products.value.findIndex((p) => p.id === product.id);
+  if (index !== -1) {
+    products.value[index] = product;
+  }
+
+  // Close the dialog
+  editProductDialog.value = false;
+};
+
+// const products = ref([
+//   {
+//     id: "1000",
+//     code: "f230fh0g3",
+//     name: "Bamboo Watch",
+//     description: "Product Description",
+//     image: "bamboo-watch.jpg",
+//     price: 65,
+//     category: "Accessories",
+//     quantity: 24,
+//     inventoryStatus: "INSTOCK",
+//     rating: 5,
+//   },
+//   {
+//     id: "1001",
+//     code: "f230fh0g3",
+//     name: "Bamboo Watch",
+//     description: "Product Description",
+//     image: "bamboo-watch.jpg",
+//     price: 65,
+//     category: "Accessories",
+//     quantity: 24,
+//     inventoryStatus: "LOWSTOCK",
+//     rating: 5,
+//   },
+//   {
+//     id: "1002",
+//     code: "f230fh0g3",
+//     name: "Bamboo Watch",
+//     description: "Product Description",
+//     image: "bamboo-watch.jpg",
+//     price: 65,
+//     category: "Accessories",
+//     quantity: 24,
+//     inventoryStatus: "INSTOCK",
+//     rating: 5,
+//   },
+// ]);
+const formatCurrency = (value) => {
+  if (value == null || isNaN(value)) {
+    // Handle invalid value (e.g., undefined, null, or NaN)
+    return "Invalid Value"; // Or return a fallback value like '$0.00'
+  }
+
+  return value.toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
   });
-  
-  const editProduct = (product) => {
-    console.log(product);
-  };
-  
-  const deleteProduct = (product) => {
-    console.log(product);
-  };
-  </script>
-  <style>
-  @reference "@/style.css";
-  </style>
-  
+};
+const getSeverity = (product) => {
+  switch (product.inventoryStatus) {
+    case "INSTOCK":
+      return "success";
+
+    case "LOWSTOCK":
+      return "warn";
+
+    case "OUTOFSTOCK":
+      return "danger";
+
+    default:
+      return null;
+  }
+};
+// , {
+//       params: {
+//         keyword: route.query.keyword || "",
+//         direction: route.query.direction || "",
+//         orderBy: route.query.orderBy || "",
+//         page: route.query.page || "",
+//       },
+//     }
+const products = ref([]);
+function fetchData() {
+  loading.value = true;
+  axios
+    .get("vendors")
+    .then((res) => {
+      products.value = res.data.data;
+
+      // paginator.value = res.data.meta;
+      loading.value = false;
+    })
+    .catch(() => (loading.value = false));
+}
+
+onMounted(() => {
+  fetchData();
+});
+
+const editProduct = (product) => {
+  console.log(product);
+};
+
+const deleteProduct = (product) => {
+  console.log(product);
+};
+</script>
+<style>
+@reference "@/style.css";
+</style>

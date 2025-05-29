@@ -6,3 +6,111 @@
   --p-datatable-header-background: #f0f0f0;
   --color-secondary: #bcc2c4;
 }
+
+.loader {
+  transform: rotateZ(45deg);
+  perspective: 1000px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: block;
+}
+.loader:before,
+.loader:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: inherit;
+  height: inherit;
+  border-radius: 50%;
+  transform: rotateX(70deg);
+  animation: 1s spin linear infinite;
+}
+.loader:after {
+  color: var(--color-primary);
+  transform: rotateY(70deg);
+  animation-delay: 0.4s;
+}
+.base-btn {
+  box-shadow: 0px 6px 20px 0px #31703f78;
+  svg {
+    path {
+      transition: all 0.3s ease-in;
+    }
+  }
+  &:hover {
+    @apply text-primary border-primary;
+    svg {
+      path {
+        @apply fill-primary;
+      }
+    }
+  }
+
+  @apply hover:cursor-pointer min-w-[140px] text-white hover:bg-white flex items-center justify-center gap-3 hover:text-primary hover:border-primary border border-primary rounded-full py-2 px-5 bg-primary font-medium duration-300;
+
+  &:disabled {
+    @apply bg-[#31703F1A] text-[#CACBD2] border-[#31703F1A];
+
+    &:hover {
+      &::before,
+      &::after {
+        content: unset;
+      }
+    }
+  }
+}
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  transition: background-color 600000s 0s, color 600000s 0s;
+}
+input[data-autocompleted] {
+  background-color: transparent !important;
+}
+@keyframes rotate {
+  0% {
+    transform: translate(-50%, -50%) rotateZ(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotateZ(360deg);
+  }
+}
+
+@keyframes rotateccw {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(-360deg);
+  }
+}
+
+@keyframes spin {
+  0%,
+  100% {
+    box-shadow: 0.2em 0px 0 0px currentColor;
+  }
+  12% {
+    box-shadow: 0.2em 0.2em 0 0 currentColor;
+  }
+  25% {
+    box-shadow: 0 0.2em 0 0 currentColor;
+  }
+  37% {
+    box-shadow: -0.2em 0.2em 0 0 currentColor;
+  }
+  50% {
+    box-shadow: -0.2em 0 0 0 currentColor;
+  }
+  62% {
+    box-shadow: -0.2em -0.2em 0 0 currentColor;
+  }
+  75% {
+    box-shadow: 0px -0.2em 0 0 currentColor;
+  }
+  87% {
+    box-shadow: 0.2em -0.2em 0 0 currentColor;
+  }
+}

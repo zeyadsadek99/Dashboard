@@ -14,7 +14,7 @@
         :for="id"
         v-if="label"
         :class="labelClass"
-        class="label !flex gap-2 capitalize items-center"
+        class="label !flex gap-2 ps-1 capitalize items-center text-primary/90"
       >
         <svg-icon v-if="labelIcon" :name="labelIcon" classes="text-xl" />
 
@@ -44,7 +44,7 @@
           @focus="$emit('focus')"
           :type="type"
           :id="id"
-            v-bind="field"
+          v-bind="field"
           :placeholder="placeholder"
           :autocomplete="false"
           :minlength="minlength"
@@ -150,4 +150,18 @@ watch(
 );
 </script>
 
-<style></style>
+<style>
+@reference "../../style.css";
+.input_wrapper {
+  @apply relative space-y-1 border border-primary/50 shadow-[0px_6px_20px_0px_#0000001A] rounded-xl p-3;
+  input {
+    @apply p-2 w-full bg-transparent;
+    &:focus {
+      @apply !border-none !outline-none;
+    }
+    &:-webkit-autofill {
+      @apply !border-none !outline-none !bg-green-500;
+    }
+  }
+}
+</style>

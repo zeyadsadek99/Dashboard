@@ -4,13 +4,13 @@
   >
     <div class="flex items-center justify-center px-4">
       <!-- <p class="text-white text-lg font-semibold mb-1">Hello, Zeyad</p> -->
-      <img src="../assets/images/logo/logo.svg" alt="" class="w-20" />
+      <img src="../../assets/images/logo/logo.svg" alt="" class="w-30 " />
     </div>
     <PanelMenu :model="items" class="w-full !gap-0 md:w-64 !border-green-300">
       <template #item="{ item, active }">
         <router-link :to="item.to" @click="active = !active">
           <a
-            class="flex items-center p-2 cursor-pointer group hover:!bg-white/30 rounded-xl"
+            class="flex items-center p-2 cursor-pointer group !bg-white/10 hover:!bg-white/25 rounded-xl"
             :class="active ? '!bg-(--secondary-color)/30' : ''"
           >
             <GlobalIcons :name="item?.icon" classes="size-5 !text-white" />

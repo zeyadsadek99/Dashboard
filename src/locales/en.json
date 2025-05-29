@@ -1,28 +1,36 @@
 {
-    "hello": "hello",
-    "TITLES": {
-        "welcomeTo": "Welcome to Filter",
-        "Login": "Login"
-    },
-    "LABELS": {
-        "email": "Email",
-        "password": "Password",
-        "phone": "Phone",
-        "phoneCode": "Phone Code",
-        "Enter": "Enter your {name}"
-    },
-    "ERRORS": {
-        "isRequired": "This field is required",
-        "validEmailAddress": "Please enter a valid email address",
-        "emailAddress": "Email Address is required",
-        "password": "Password is required"
-    },
-    "BUTTONS": {
-        "login": "Login",
-        "Add Product": "Add Product"
-    },
-    "locale": {
-        "ar": "Ar",
-        "en": "En"
-    }
+  "hello": "hello",
+  "TITLES": {
+    "welcomeTo": "Welcome to Filter",
+    "Login": "Login"
+  },
+  "LABELS": {
+    "email": "Email",
+    "password": "Password",
+    "phone": "Phone",
+    "phoneCode": "Phone Code",
+    "Enter": "Enter your {name}",
+    "name": "Name",
+    "address": "Address",
+    "image": "Image",
+    "dropFilesHereOrClickToUpload": "Drop files here or click to upload",
+    "uploadingFile": "Uploading File",
+    "Select location from map": "Select location from map"
+  },
+  "ERRORS": {
+    "isRequired": "This field is required",
+    "validEmailAddress": "Please enter a valid email address",
+    "emailAddress": "Email Address is required",
+    "password": "Password is required"
+  },
+  "BUTTONS": {
+    "login": "Login",
+    "Add Product": "Add Product",
+    "Update": "Update",
+    "save": "Save"
+  },
+  "locale": {
+    "ar": "Ar",
+    "en": "En"
+  }
 }
