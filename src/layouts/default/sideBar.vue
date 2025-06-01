@@ -45,6 +45,7 @@ const items = ref([
     icon: "envelope",
     badge: 5,
     listIcon: "right-arrow",
+    to: "/",
     items: [
       {
         to: "/",
@@ -72,42 +73,42 @@ const items = ref([
     ],
   },
   {
-    label: "Mail2",
+    label: "Vendors",
     icon: "envelope",
     badge: 5,
     to: "/vendors",
   },
-  {
-    label: "Mail3",
-    icon: "envelope",
-    badge: 5,
-    listIcon: "right-arrow",
-    items: [
-      {
-        to: "/",
-        label: "Compose",
-        icon: "envelope",
-        shortcut: "⌘+N",
-      },
-      {
-        to: "/slider",
-        label: "Inbox",
-        icon: "envelope",
-        badge: 5,
-      },
-      {
-        to: "/slider",
-        label: "Sent",
-        icon: "envelope",
-        shortcut: "⌘+S",
-      },
-      {
-        to: "/slider",
-        icon: "envelope",
-        shortcut: "⌘+T",
-      },
-    ],
-  },
+  // {
+  //   label: "Mail3",
+  //   icon: "envelope",
+  //   badge: 5,
+  //   listIcon: "right-arrow",
+  //   items: [
+  //     {
+  //       to: "/",
+  //       label: "Compose",
+  //       icon: "envelope",
+  //       shortcut: "⌘+N",
+  //     },
+  //     {
+  //       to: "/slider",
+  //       label: "Inbox",
+  //       icon: "envelope",
+  //       badge: 5,
+  //     },
+  //     {
+  //       to: "/slider",
+  //       label: "Sent",
+  //       icon: "envelope",
+  //       shortcut: "⌘+S",
+  //     },
+  //     {
+  //       to: "/slider",
+  //       icon: "envelope",
+  //       shortcut: "⌘+T",
+  //     },
+  //   ],
+  // },
 ]);
 </script>
 <style>

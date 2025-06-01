@@ -33,7 +33,7 @@
   
       <template v-else>
         {{ $t(`BUTTONS.${name}`) }}
-        <svg-icon v-if="icon" :name="icon" />
+        <GlobalIcons v-if="icon" :name="icon" />
       </template>
     </button>
   </template>

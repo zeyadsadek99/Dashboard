@@ -26,10 +26,9 @@
         rotateControl: false,
         fullscreenControl: true,
       }"
-      style="width: 100%; height: 350px"
+      :style="{ width: '100%', height: height }"
       @click="getClickedLatLng"
     >
-      <pre>{{ paths }}</pre>
       <template v-if="canDraw">
         <GMapMarker
           :position="center"
@@ -105,6 +104,11 @@ const props = defineProps({
     type: Array,
     required: false,
   },
+  height: {
+    type: String,
+    required: false,
+    default: "350px",
+  },
 });
 
 const latFiled = useField("location.lat");
@@ -131,7 +135,6 @@ function markerdraged(index, e) {
   polylineRef.value.paths[index] = marker;
   areas.setValue(paths.value);
   console.log(paths.value);
-
 }
 
 function openMarker(place) {

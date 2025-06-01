@@ -103,7 +103,7 @@ const getData = () => {
     // console.log("sadffdsfa", res.data.data);
     // vendor.value.location.lat = +vendor.value.location.lat;
     // vendor.value.location.lng = +vendor.value.location.lng;
-    loading.value = true;
+    loading.value = false;
   });
   // vendorsStore.getVendor(id).then((res) => {
   //     vendor.value = res.data;

@@ -69,7 +69,7 @@ const router = createRouter({
               //   auth: true,
               //   permission: ["facility-types", "store"],
               // },
-              component: () => import("../views/dashboard/vendors/show.vue"),
+              component: () => import("../views/dashboard/vendors/edit.vue"),
             },
           ],
         },

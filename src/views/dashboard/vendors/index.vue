@@ -99,21 +99,21 @@
               >
                 <GlobalIcons name="eye2" classes="text-blue-500 mt-1" />
               </router-link>
-              <button
+              <router-link
+                :to="`/vendors/edit/${slotProps.data.id}`"
                 type="button"
                 class="cursor-pointer"
-                @click="openEditProductDialog(slotProps.data)"
               >
                 <GlobalIcons name="edit" classes="text-green-500" />
-              </button>
-              <Dialog
+              </router-link>
+              <!-- <Dialog
                 v-model:visible="editProductDialog"
                 :style="{ width: '450px' }"
                 header="Edit Product"
                 :modal="true"
               >
               </Dialog>
-              <ConfirmPopup></ConfirmPopup>
+              <ConfirmPopup></ConfirmPopup> -->
 
               <button
                 class="cursor-pointer"
@@ -125,7 +125,7 @@
           </template>
         </Column>
 
-        <template #footer>
+        <!-- <template #footer>
           <GlobalButton
             name="Add Product"
             @click="openEditProductDialog"
@@ -134,8 +134,13 @@
           />
           {{ t("hello") }}
           In total there are {{ products ? products.length : 0 }} products.
-        </template>
+        </template> -->
       </DataTable>
+      <GlobalPagination
+        :last_page="paginator.last_page"
+        :current_page="paginator.current_page"
+        @paginationClick="onPageChange"
+      />
     </div>
   </template>
 </template>
@@ -144,9 +149,26 @@
 import { ref, onMounted } from "vue";
 import { useI18n } from "vue-i18n";
 import axios from "axios";
+import { useRoute, useRouter } from "vue-router";
+
+const route = useRoute();
+const router = useRouter();
 
 const { t } = useI18n();
 const loading = ref(false);
+const start_page = ref(route.query.page || 1);
+const paginator = ref({});
+
+const onPageChange = (event) => {
+  console.log(event);
+  router.push({
+    query: {
+      page: event,
+    },
+  });
+  start_page.value = event;
+  fetchData();
+};
 
 const editProductDialog = ref(false);
 const editingProduct = ref(null);
@@ -157,58 +179,17 @@ const openEditProductDialog = () => {
 };
 
 const saveProduct = (product) => {
-  // Update the product in the products array
   const index = products.value.findIndex((p) => p.id === product.id);
   if (index !== -1) {
     products.value[index] = product;
   }
 
-  // Close the dialog
   editProductDialog.value = false;
 };
 
-// const products = ref([
-//   {
-//     id: "1000",
-//     code: "f230fh0g3",
-//     name: "Bamboo Watch",
-//     description: "Product Description",
-//     image: "bamboo-watch.jpg",
-//     price: 65,
-//     category: "Accessories",
-//     quantity: 24,
-//     inventoryStatus: "INSTOCK",
-//     rating: 5,
-//   },
-//   {
-//     id: "1001",
-//     code: "f230fh0g3",
-//     name: "Bamboo Watch",
-//     description: "Product Description",
-//     image: "bamboo-watch.jpg",
-//     price: 65,
-//     category: "Accessories",
-//     quantity: 24,
-//     inventoryStatus: "LOWSTOCK",
-//     rating: 5,
-//   },
-//   {
-//     id: "1002",
-//     code: "f230fh0g3",
-//     name: "Bamboo Watch",
-//     description: "Product Description",
-//     image: "bamboo-watch.jpg",
-//     price: 65,
-//     category: "Accessories",
-//     quantity: 24,
-//     inventoryStatus: "INSTOCK",
-//     rating: 5,
-//   },
-// ]);
 const formatCurrency = (value) => {
   if (value == null || isNaN(value)) {
-    // Handle invalid value (e.g., undefined, null, or NaN)
-    return "Invalid Value"; // Or return a fallback value like '$0.00'
+    return "Invalid Value";
   }
 
   return value.toLocaleString("en-US", {
@@ -243,11 +224,17 @@ const products = ref([]);
 function fetchData() {
   loading.value = true;
   axios
-    .get("vendors")
+    .get("vendors", {
+      params: {
+        page: start_page.value,
+      },
+    })
     .then((res) => {
       products.value = res.data.data;
 
-      // paginator.value = res.data.meta;
+      paginator.value = res.data.meta;
+      start_page.value = res.data.meta.current_page;
+
       loading.value = false;
     })
     .catch(() => (loading.value = false));
